@@ -99,6 +99,14 @@ let g:ycm_log_level='debug'
 "-------------------------------------------------
 " VimWiki,some kinds of personal diary
 Plugin 'vimwiki/vimwiki'
+" Define wiki options
+let wiki_1 = {}
+let wiki_1.path = '/home/liuyeqs/My_vimwiki/vimwiki/'
+" let wiki_1.html_template = '~/public_html/template.tpl'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
+
+let g:vimwiki_list = [wiki_1]
+let g:automatic_nested_syntaxes = 1
 
 "-------------------------------------------------
 " vim-rainbow
