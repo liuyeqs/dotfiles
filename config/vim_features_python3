@@ -1,0 +1,12 @@
+./configure \
+  --enable-fail-if-missing \
+  --with-features=huge \
+  --disable-selinux \
+  --enable-perlinterp \
+  --enable-python3interp=yes \
+  --with-python3-config-dir=$HOME/.pyenv/versions/3.8.2/lib/python3.8/config-3.8-x86_64-linux-gnu \
+  --enable-luainterp=yes \
+  --with-lua-prefix=$HOME/.luaenv/versions/5.3.5 \
+  --enable-cscope \
+  --enable-fontset \
+  --enable-multibyte
