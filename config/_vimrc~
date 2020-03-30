@@ -1,0 +1,280 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" call vundle#begin('~/some/path/here')
+"
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+"-------------------------------------------------
+" plugin SimpylFold
+Plugin 'tmhedberg/SimpylFold'
+let g:SimpylFold_docstring_preview=1
+
+"-------------------------------------------------
+" Syntax checking
+Plugin 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list=0
+let g:syntastic_auto_loc_list=0
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+
+"-------------------------------------------------
+" nvie/vim-flake8
+Plugin 'nvie/vim-flake8'
+" <F7> syntax check
+
+"-------------------------------------------------
+" NERDTree
+Plugin 'scrooloose/nerdtree'
+autocmd vimenter * NERDTree    " Load NERDTree automatically when vim starts up
+autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" let g:NERDTreeShowHidden=1
+" Open NERDTRee
+noremap ,tree :NERDTree<cr>
+
+"-------------------------------------------------
+" YCM
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_keep_logfiles=1
+let g:ycm_log_level='debug'
+
+"-------------------------------------------------
+" tagbar
+Plugin 'majutsushi/tagbar'
+let g:tagbar_ctags_bin = 'C:\Users\003585\vimfiles\ctags-2019-07-25_1a94658c-x64.debug\ctags.exe'
+noremap <F8> :TagbarToggle<CR>
+
+"-------------------------------------------------
+" Split window resize
+Plugin 'simeji/winresizer'
+" The key used to start winresizer
+let g:winresizer_start_key='<C-a>'  " <C-a>: Original function to get number ++
+" Finish with <Esc> if this value is 1
+let g:winresizer_finish_with_escape=1
+" The width to add or subtract when the `left` or `right` key is pressed
+let g:winresizer_vert_resize=1
+" The height to add or subtract when the `up` or `down` key is pressed
+let g:winresizer_horiz_resize=1
+
+"-------------------------------------------------
+" airline
+Plugin 'vim-airline/vim-airline'
+" airline-themes
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='fruit_punch'
+
+"-------------------------------------------------
+" Vim Calendar(Google Calendar and Google Task)
+Plugin 'itchyny/calendar.vim'
+" View and edit calendar on Google Calendar, or task on Google Task
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+" Open calendar.vim clock
+noremap ,time :Calendar -view=clock<cr>
+
+"-------------------------------------------------
+" VimWiki, some kinds of personal diary
+Plugin 'vimwiki/vimwiki'
+" open/write today's dairy
+" <Leader>w<Leader>w
+" generate dairy index
+" <Leader>w<Leader>i
+let g:vimwiki_folding = 'expr'
+
+" Define wiki options
+let wiki_1 = {}
+let wiki_1.path = 'c:/003585/toolbox/vim_toolbox/My_vimwiki/vimwiki'
+" let wiki_1.html_template = '~/public_html/template.tpl'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
+let automatic_nested_syntaxes = 1
+
+"-------------------------------------------------
+" vim-rainbow
+Plugin 'luochen1990/rainbow'
+" au FileType c,cpp,objc,objcpp,python,r call rainbow#load()
+" enable this plugin globally
+let g:rainbow_active = 1
+" :RainbowToggle  --toggle this plugin
+" :RainbowLoad    --load/reload this plugin
+
+"-------------------------------------------------
+" Vim with Markdown and Preview
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'kannokanno/previm'
+Plugin 'tyru/open-browser.vim'
+
+""" markdown {{{
+  autocmd BUfRead,BufNewFile *.mkd set filetype=markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  " Need: kannokanno/previm
+  nnoremap <C-p> :PrevimOpen<CR> " Ctrl-p open previm
+  " not fold up automatically
+  let g:vim_markdown_folding_disable=1
+  let g:previm_enable_realtime=1
+" }}}
+
+" All of your Plugins must be added before the following line
+"-------------------------------------------------------------------------------
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to
+" auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" The following will be basic settings for vim
+"-------------------------------------------------------------------------------
+
+" Vim with all enhancements
+source $VIMRUNTIME/vimrc_example.vim
+
+" Use the internal diff if available.
+" Otherwise use the special 'diffexpr' for Windows.
+if &diffopt !~# 'internal'
+  set diffexpr=MyDiff()
+endif
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+" UTF-8 Support
+set encoding=utf-8
+
+syntax on
+filetype plugin on
+set nocompatible
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set ai
+set number
+set relativenumber
+set printoptions=number:y
+set hlsearch
+set ruler
+" set cursorcolumn
+" set cursorline
+:colorscheme evening
+set guioptions-=m  "hide menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
+set guioptions-=L  "leftside scrollbar
+" Split Layouts
+set splitbelow
+set splitright
+set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
+:set noundofile  " Stop creating the undofile-backup files
+
+
+" Highlight
+"-------------------------------------------------
+highlight Normal guibg=#343236
+highlight LineNr guifg=#aabfbd
+highlight Comment guifg=#519953
+" Special color for my own special comment
+au! BufEnter *.py syn match specialComment /# liu>>>.*/  " Python files (*.py)
+highlight specialComment guifg=#ffbf11
+
+" syntax highlight for python self
+:syn keyword pythonBuiltin self
+
+" Search highlight
+highlight Search term=bold,reverse ctermfg=0 ctermbg=14 gui=bold guifg=Black guibg=Magenta
+
+
+" Remap some KEY
+"-------------------------------------------------
+:let mapleader=","
+
+" remap for split shifting
+noremap <C-H> <C-W><C-H>
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+
+" remap print for gvim
+noremap ,print :hardcopy<cr>
+
+" remap save for vim
+noremap ,s :w<cr>
+
+
+"-------------------------------------------------
+" Setting for auto-complete of trentheses
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+" Show matching sets of parentheses
+:set showmatch
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding/unfolding with the spacebar instead of <za>
+nnoremap <space> za
