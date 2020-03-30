@@ -217,7 +217,7 @@ set printoptions=number:y
 set hlsearch
 set ruler
 " set cursorcolumn
-" set cursorline
+set cursorline
 :colorscheme evening
 set guioptions-=m  "hide menu bar
 set guioptions-=T  "toolbar
