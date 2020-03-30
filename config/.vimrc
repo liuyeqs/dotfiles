@@ -36,13 +36,6 @@ Plugin 'skywind3000/asyncrun.vim'
 "-------------------------------------------------
 " Syntax checking
 Plugin 'vim-syntastic/syntastic.git'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=0
-let g:syntastic_auto_loc_list=0
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
 
 "-------------------------------------------------
 " nvie/vim-flake8
@@ -58,64 +51,30 @@ Plugin 'nvie/vim-flake8'
 Plugin 'vim-airline/vim-airline'
 " vim-airline-themes
 Plugin 'vim-airline/vim-airline-themes'
-let g:airline_theme='fruit_punch'
 
 "-------------------------------------------------
 " Split window resize
 Plugin 'simeji/winresizer'
-" The key used to start winresizer
-let g:winresizer_start_key='<C-a>'  " <C-a>: original function to get number ++
-" Finish with <Esc> if this value is 1
-let g:winresizer_finish_with_escape=1
-" The width to add or subtract when the 'left' or 'right' key is pressed
-let g:winresizer_vert_resize=1
-" The height to add or subtract when the 'up' or 'down' key is pressed
-let g:winresizer_horiz_resize=1
 
 "-------------------------------------------------
 " Vim Calendar(Google Calendar and Google Task)
 Plugin 'itchyny/calendar.vim'
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-" Open calendar.vim clock
-noremap ,time :Calendar -view=clock<cr>
 
 "-------------------------------------------------
 " NERDTree
 Plugin 'scrooloose/nerdtree.git'
-autocmd vimenter * NERDTree  " Load NERDTree automatically when vim starts up
-autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeWinSize=20
-" let g:NERDTreeShowHidden=1
-" Remap open NERDTree
-noremap ,tree :NERDTree<cr>
 
 "-------------------------------------------------
 " YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_keep_logfiles=1
-let g:ycm_log_level='debug'
 
 "-------------------------------------------------
 " VimWiki,some kinds of personal diary
 Plugin 'vimwiki/vimwiki'
-" Define wiki options
-let wiki_1 = {}
-let wiki_1.path = '/home/liuyeqs/My_vimwiki/vimwiki/'
-" let wiki_1.html_template = '~/public_html/template.tpl'
-let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
-
-let g:vimwiki_list = [wiki_1]
-let g:automatic_nested_syntaxes = 1
 
 "-------------------------------------------------
 " vim-rainbow
 Plugin 'luochen1990/rainbow'
-" au FileType c,cpp,objc,objcpp,python,r, call rainbow#load()
-" enable this plugin globally
-let g:rainbow_active=1
-" :RainbowToggle  --toggle this plugin
-" :RainbowLoad    --load/reload this plugin
 
 "-------------------------------------------------
 " Vim with Markdown and Preview
@@ -125,39 +84,11 @@ Plugin 'kannokanno/previm'
 Plugin 'tyru/open-browser.vim'
 
 "-------------------------------------------------
-""" markdown {{{
-  autocmd BUfRead,BufNewFile *.mkd set filetype=markdown
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  " Need: kannokanno/previm
-  nnoremap <C-p> :PrevimOpen<CR> " Ctrl-p open previm
-  " not fold up automatically
-  let g:vim_markdown_folding_disable=1
-  let g:previm_enable_realtime=1
-" }}}
-
-"-------------------------------------------------
 " English dictionary in vim
 Plugin 'phongvcao/vim-stardict'
-" Make vim-stardict split open in a :split (default value)
-let g:stardict_split_horizontal=1
-" Set vim-stardict split width (or height) to 20 based on whether
-" vim-stardict split is a :vsplit (or :split)
-let g:stardict_split_size=20
-" Map vim-stardict's commands
-" Ready for typing the word in
-nnoremap ,dict :silent! StarDict<Space>
-" Lookup the word under cursor
-nnoremap ,w :silent! StarDictCursor<CR>
-" OPTIONAL: You can change the colors of output of vim-stardict inside Vim as follow
-" highlight link stardictResult Special                        " Default value
-" highlight link stardictWord PreProc                          " Default value
-" highlight link stardictWordType Statement                    " Default value
-" highlight link stardictWordMeaning Identifier                " Default value
-" highlight link stardictWordExample Type                      " Default value
-" highlight link stardictDictName Underlined                   " Default value
 
 " All of your Plugins must be added before the following line
-"----------------------------------------------------------------------------"
+"===============================================================================
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -174,7 +105,7 @@ filetype plugin indent on    " required
 
 
 " The following will be basic settings for vim
-"----------------------------------------------------------------------------"
+"===============================================================================
 
 " UTF-8 Support
 set encoding=utf-8
@@ -196,6 +127,24 @@ set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
 set textwidth=100  " Make it obvious where 100 characters is
 
 
+" Remap some KEY
+"-------------------------------------------------
+:let mapleader = "\<Space>"
+
+" remap for split shifting
+noremap <C-H> <C-W><C-H>
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+
+" remap print
+noremap <Leader>print :hardcopy<cr>
+set printoptions=number:y
+
+" remap save
+noremap <Leader>s :w<cr>
+
+
 " Highlight
 "-------------------------------------------------
 " let g:colors_name = expand('<sfile>:t:r')
@@ -215,24 +164,6 @@ highlight Comment ctermfg=71
 " Highlight My Comment(beginning with liu>>>)
 au! BufEnter *.py syn match specialComment /# liu>>>.*/  " Python files (*.py)
 highlight specialComment ctermfg=214
-
-
-" Remap some KEY
-"-------------------------------------------------
-:let mapleader = ","
-
-" remap for split shifting
-noremap <C-H> <C-W><C-H>
-noremap <C-J> <C-W><C-J>
-noremap <C-K> <C-W><C-K>
-noremap <C-L> <C-W><C-L>
-
-" remap print
-noremap ,print :hardcopy<cr>
-set printoptions=number:y
-
-" remap save
-noremap ,s :w<cr>
 
 
 "-------------------------------------------------
@@ -266,3 +197,113 @@ inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 " Show matching sets of parentheses
 :set showmatch
+
+
+" Plugin
+"===============================================================================
+" Syntax checking
+"-------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list=0
+let g:syntastic_auto_loc_list=0
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+
+
+" airline
+"-------------------------------------------------
+let g:airline_theme='fruit_punch'
+
+
+" Split window resize
+"-------------------------------------------------
+" The key used to start winresizer
+let g:winresizer_start_key='<C-a>'  " <C-a>: original function to get number ++
+" Finish with <Esc> if this value is 1
+let g:winresizer_finish_with_escape=1
+" The width to add or subtract when the 'left' or 'right' key is pressed
+let g:winresizer_vert_resize=1
+" The height to add or subtract when the 'up' or 'down' key is pressed
+let g:winresizer_horiz_resize=1
+
+
+" Vim Calendar(Google Calendar and Google Task)
+"-------------------------------------------------
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+" Open calendar.vim clock
+noremap <Leader>time :Calendar -view=clock<cr>
+
+
+" NERDTree
+"-------------------------------------------------
+autocmd vimenter * NERDTree  " Load NERDTree automatically when vim starts up
+autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeWinSize=20
+" let g:NERDTreeShowHidden=1
+" Remap open NERDTree
+noremap <Leader>tree :NERDTree<cr>
+
+
+" YCM
+"-------------------------------------------------
+let g:ycm_keep_logfiles=1
+let g:ycm_log_level='debug'
+
+
+" Vimwiki
+"-------------------------------------------------
+let g:vimwiki_folding = 'expr'
+" Define wiki options
+let wiki_1 = {}
+let wiki_1.path = '/home/liuyeqs/My_vimwiki/vimwiki/'
+" let wiki_1.html_template = '~/public_html/template.tpl'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
+
+let g:vimwiki_list = [wiki_1]
+let g:automatic_nested_syntaxes = 1
+
+
+" vim-rainbow
+"-------------------------------------------------
+" au FileType c,cpp,objc,objcpp,python,r, call rainbow#load()
+" enable this plugin globally
+let g:rainbow_active=1
+" :RainbowToggle  --toggle this plugin
+" :RainbowLoad    --load/reload this plugin
+
+
+" Markdown and Preview
+"-------------------------------------------------
+" markdown {{{
+  autocmd BUfRead,BufNewFile *.mkd set filetype=markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  " Need: kannokanno/previm
+  nnoremap <C-p> :PrevimOpen<CR> " Ctrl-p open previm
+  " not fold up automatically
+  let g:vim_markdown_folding_disable=1
+  let g:previm_enable_realtime=1
+" }}}
+
+
+" English dictionary
+"-------------------------------------------------
+" Make vim-stardict split open in a :split (default value)
+let g:stardict_split_horizontal=1
+" Set vim-stardict split width (or height) to 20 based on whether
+" vim-stardict split is a :vsplit (or :split)
+let g:stardict_split_size=20
+" Map vim-stardict's commands
+" Ready for typing the word in
+nnoremap <Leader>dict :silent! StarDict<Space>
+" Lookup the word under cursor
+nnoremap <Leader>w :silent! StarDictCursor<CR>
+" OPTIONAL: You can change the colors of output of vim-stardict inside Vim as follow
+" highlight link stardictResult Special                        " Default value
+" highlight link stardictWord PreProc                          " Default value
+" highlight link stardictWordType Statement                    " Default value
+" highlight link stardictWordMeaning Identifier                " Default value
+" highlight link stardictWordExample Type                      " Default value
+" highlight link stardictDictName Underlined                   " Default value
