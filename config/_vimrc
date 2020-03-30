@@ -108,9 +108,11 @@ let g:vimwiki_folding = 'expr'
 
 " Define wiki options
 let wiki_1 = {}
-let wiki_1.path = 'C:/003585/toolbox/vim_toolbox/My_vimwiki/vimwiki'
+let wiki_1.path = 'c:/003585/toolbox/vim_toolbox/My_vimwiki/vimwiki'
 " let wiki_1.html_template = '~/public_html/template.tpl'
 let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
+
+let g:vimwiki_list = [wiki_1]
 let automatic_nested_syntaxes = 1
 
 "-------------------------------------------------
