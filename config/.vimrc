@@ -71,18 +71,6 @@ Plugin 'Valloric/YouCompleteMe'
 "-------------------------------------------------
 " VimWiki,some kinds of personal diary
 Plugin 'vimwiki/vimwiki'
-<<<<<<< HEAD
-=======
-let g:vimwiki_folding = 'expr'
-" Define wiki options
-let wiki_1 = {}
-let wiki_1.path = '/home/liuyeqs/My_vimwiki/vimwiki/'
-" let wiki_1.html_template = '~/public_html/template.tpl'
-let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
-
-let g:vimwiki_list = [wiki_1]
-let g:automatic_nested_syntaxes = 1
->>>>>>> 5775aa9fd23ec9311391a85e0aedc63f1e9fd834
 
 "-------------------------------------------------
 " vim-rainbow
@@ -95,19 +83,6 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'kannokanno/previm'
 Plugin 'tyru/open-browser.vim'
 
-<<<<<<< HEAD
-=======
-""" markdown {{{
-  autocmd BUfRead,BufNewFile *.mkd set filetype=markdown
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  " Need: kannokanno/previm
-  nnoremap <C-p> :PrevimOpen<CR> " Ctrl-p open previm
-  " not fold up automatically
-  let g:vim_markdown_folding_disable=1
-  let g:previm_enable_realtime=1
-" }}}
-
->>>>>>> 5775aa9fd23ec9311391a85e0aedc63f1e9fd834
 "-------------------------------------------------
 " English dictionary in vim
 Plugin 'phongvcao/vim-stardict'
