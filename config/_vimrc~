@@ -1,17 +1,21 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+"===============================================================================
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
 "
+"-------------------------------------------------
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
+
+"-------------------------------------------------
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -21,6 +25,8 @@ Plugin 'tpope/vim-fugitive'
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
+
+"-------------------------------------------------
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
@@ -35,13 +41,6 @@ let g:SimpylFold_docstring_preview=1
 "-------------------------------------------------
 " Syntax checking
 Plugin 'vim-syntastic/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=0
-let g:syntastic_auto_loc_list=0
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
 
 "-------------------------------------------------
 " nvie/vim-flake8
@@ -51,76 +50,36 @@ Plugin 'nvie/vim-flake8'
 "-------------------------------------------------
 " NERDTree
 Plugin 'scrooloose/nerdtree'
-autocmd vimenter * NERDTree    " Load NERDTree automatically when vim starts up
-autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" let g:NERDTreeShowHidden=1
-" Open NERDTRee
-noremap ,tree :NERDTree<cr>
 
 "-------------------------------------------------
 " YCM
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_keep_logfiles=1
-let g:ycm_log_level='debug'
 
 "-------------------------------------------------
 " tagbar
 Plugin 'majutsushi/tagbar'
-let g:tagbar_ctags_bin = 'C:\Users\003585\vimfiles\ctags-2019-07-25_1a94658c-x64.debug\ctags.exe'
-noremap <F8> :TagbarToggle<CR>
 
 "-------------------------------------------------
 " Split window resize
 Plugin 'simeji/winresizer'
-" The key used to start winresizer
-let g:winresizer_start_key='<C-a>'  " <C-a>: Original function to get number ++
-" Finish with <Esc> if this value is 1
-let g:winresizer_finish_with_escape=1
-" The width to add or subtract when the `left` or `right` key is pressed
-let g:winresizer_vert_resize=1
-" The height to add or subtract when the `up` or `down` key is pressed
-let g:winresizer_horiz_resize=1
 
 "-------------------------------------------------
 " airline
 Plugin 'vim-airline/vim-airline'
 " airline-themes
 Plugin 'vim-airline/vim-airline-themes'
-let g:airline_theme='fruit_punch'
 
 "-------------------------------------------------
 " Vim Calendar(Google Calendar and Google Task)
 Plugin 'itchyny/calendar.vim'
-" View and edit calendar on Google Calendar, or task on Google Task
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-" Open calendar.vim clock
-noremap ,time :Calendar -view=clock<cr>
 
 "-------------------------------------------------
 " VimWiki, some kinds of personal diary
 Plugin 'vimwiki/vimwiki'
-" open/write today's dairy
-" <Leader>w<Leader>w
-" generate dairy index
-" <Leader>w<Leader>i
-let g:vimwiki_folding = 'expr'
-
-" Define wiki options
-let wiki_1 = {}
-let wiki_1.path = 'c:/003585/toolbox/vim_toolbox/My_vimwiki/vimwiki'
-" let wiki_1.html_template = '~/public_html/template.tpl'
-let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
-let automatic_nested_syntaxes = 1
 
 "-------------------------------------------------
 " vim-rainbow
 Plugin 'luochen1990/rainbow'
-" au FileType c,cpp,objc,objcpp,python,r call rainbow#load()
-" enable this plugin globally
-let g:rainbow_active = 1
-" :RainbowToggle  --toggle this plugin
-" :RainbowLoad    --load/reload this plugin
 
 "-------------------------------------------------
 " Vim with Markdown and Preview
@@ -129,18 +88,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'kannokanno/previm'
 Plugin 'tyru/open-browser.vim'
 
-""" markdown {{{
-  autocmd BUfRead,BufNewFile *.mkd set filetype=markdown
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  " Need: kannokanno/previm
-  nnoremap <C-p> :PrevimOpen<CR> " Ctrl-p open previm
-  " not fold up automatically
-  let g:vim_markdown_folding_disable=1
-  let g:previm_enable_realtime=1
-" }}}
-
 " All of your Plugins must be added before the following line
-"-------------------------------------------------------------------------------
+"===============================================================================
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -158,7 +107,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " The following will be basic settings for vim
-"-------------------------------------------------------------------------------
+"===============================================================================
 
 " Vim with all enhancements
 source $VIMRUNTIME/vimrc_example.vim
@@ -230,6 +179,23 @@ set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
 :set noundofile  " Stop creating the undofile-backup files
 
 
+" Remap some KEY
+"-------------------------------------------------
+:let mapleader= "\<Space>"
+
+" remap for split shifting
+noremap <C-H> <C-W><C-H>
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+
+" remap print for gvim
+noremap <Space>print :hardcopy<cr>
+
+" remap save for vim
+noremap <Space>s :w<cr>
+
+
 " Highlight
 "-------------------------------------------------
 highlight Normal guibg=#343236
@@ -244,23 +210,6 @@ highlight specialComment guifg=#ffbf11
 
 " Search highlight
 highlight Search term=bold,reverse ctermfg=0 ctermbg=14 gui=bold guifg=Black guibg=Magenta
-
-
-" Remap some KEY
-"-------------------------------------------------
-:let mapleader=","
-
-" remap for split shifting
-noremap <C-H> <C-W><C-H>
-noremap <C-J> <C-W><C-J>
-noremap <C-K> <C-W><C-K>
-noremap <C-L> <C-W><C-L>
-
-" remap print for gvim
-noremap ,print :hardcopy<cr>
-
-" remap save for vim
-noremap ,s :w<cr>
 
 
 "-------------------------------------------------
@@ -278,3 +227,109 @@ set foldmethod=indent
 set foldlevel=99
 " Enable folding/unfolding with the spacebar instead of <za>
 nnoremap <space> za
+
+
+" Plugin
+"===============================================================================
+" SimpplFold
+"-------------------------------------------------
+let g:SimpylFold_docstring_preview=1
+
+
+" Syntax checking
+"-------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list=0
+let g:syntastic_auto_loc_list=0
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+
+
+" NERDTree
+"-------------------------------------------------
+autocmd vimenter * NERDTree    " Load NERDTree automatically when vim starts up
+autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" let g:NERDTreeShowHidden=1
+" Open NERDTRee
+noremap <Space>tree :NERDTree<cr>
+
+
+" YCM
+"-------------------------------------------------
+let g:ycm_keep_logfiles=1
+let g:ycm_log_level='debug'
+
+
+" tagbar
+"-------------------------------------------------
+let g:tagbar_ctags_bin = 'C:\Users\003585\vimfiles\ctags-2019-07-25_1a94658c-x64.debug\ctags.exe'
+noremap <F8> :TagbarToggle<CR>
+
+
+" Split window resize
+"-------------------------------------------------
+" The key used to start winresizer
+let g:winresizer_start_key='<C-a>'  " <C-a>: Original function to get number ++
+" Finish with <Esc> if this value is 1
+let g:winresizer_finish_with_escape=1
+" The width to add or subtract when the `left` or `right` key is pressed
+let g:winresizer_vert_resize=1
+" The height to add or subtract when the `up` or `down` key is pressed
+let g:winresizer_horiz_resize=1
+
+
+" airline
+"-------------------------------------------------
+let g:airline_theme='fruit_punch'
+
+
+" Vim Calendar(Google Calendar and Google Task)
+"-------------------------------------------------
+" View and edit calendar on Google Calendar, or task on Google Task
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+" Open calendar.vim clock
+noremap <Space>time :Calendar -view=clock<cr>
+
+
+" VimWiki, some kinds of personal diary
+"-------------------------------------------------
+" open/write today's dairy
+" <Leader>w<Leader>w
+" generate dairy index
+" <Leader>w<Leader>i
+let g:vimwiki_folding = 'expr'
+
+
+" Define wiki options
+let wiki_1 = {}
+let wiki_1.path = 'c:/003585/toolbox/vim_toolbox/My_vimwiki/vimwiki'
+" let wiki_1.html_template = '~/public_html/template.tpl'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
+
+let g:vimwiki_list = [wiki_1]
+let automatic_nested_syntaxes = 1
+
+
+" vim-rainbow
+"-------------------------------------------------
+" au FileType c,cpp,objc,objcpp,python,r call rainbow#load()
+" enable this plugin globally
+let g:rainbow_active = 1
+" :RainbowToggle  --toggle this plugin
+" :RainbowLoad    --load/reload this plugin
+
+
+" Vim with Markdown and Preview
+"-------------------------------------------------
+" markdown {{{
+  autocmd BUfRead,BufNewFile *.mkd set filetype=markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  " Need: kannokanno/previm
+  nnoremap <C-p> :PrevimOpen<CR> " Ctrl-p open previm
+  " not fold up automatically
+  let g:vim_markdown_folding_disable=1
+  let g:previm_enable_realtime=1
+" }}}
