@@ -224,7 +224,7 @@ inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
-inoremap { {}<ESC>i
+" inoremap { {}<ESC>i
 inoremap { {<cr>}<ESC>ko<tab>
 " Show matching sets of parentheses
 :set showmatch

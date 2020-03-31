@@ -184,9 +184,9 @@ set noundofile  " Stop creating the undofile-backup files
 :let mapleader= "\<Space>"
 
 "Fast reloading of the .vimrl
-map  <Space>rl :source c:/003585/VIM/_vimrc<cr>
+map  <Leader>rl :source c:/003585/VIM/_vimrc<cr>
 "Fast editing of .vimrc
-map  <Space>ee :e c:/003585/toolbox/vim_toolbox/dotfiles/config/_vimrc<cr>
+map  <Leader>ee :e c:/003585/toolbox/vim_toolbox/dotfiles/config/_vimrc<cr>
 
 " remap for split shifting
 noremap <C-H> <C-W><C-H>
@@ -195,10 +195,10 @@ noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
 
 " remap print for gvim
-noremap <Space>print :hardcopy<cr>
+noremap <Leader>print :hardcopy<cr>
 
 " remap save for vim
-noremap <Space>s :w<cr>
+noremap <Leader>s :w<cr>
 
 
 " Highlight
@@ -223,7 +223,8 @@ inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
-inoremap { {}<ESC>i
+" inoremap { {}<ESC>i
+inoremap { {<cr>}<ESC>ko<tab>
 " Show matching sets of parentheses
 :set showmatch
 
@@ -231,7 +232,7 @@ inoremap { {}<ESC>i
 set foldmethod=indent
 set foldlevel=99
 " Enable folding/unfolding with the spacebar instead of <za>
-nnoremap <space> za
+nnoremap <Leader> za
 
 
 " Plugin
@@ -258,7 +259,7 @@ autocmd vimenter * NERDTree    " Load NERDTree automatically when vim starts up
 autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " let g:NERDTreeShowHidden=1
 " Open NERDTRee
-noremap <Space>tree :NERDTree<cr>
+noremap <Leader>tree :NERDTree<cr>
 
 
 " YCM
@@ -296,7 +297,7 @@ let g:airline_theme='fruit_punch'
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 " Open calendar.vim clock
-noremap <Space>time :Calendar -view=clock<cr>
+noremap <Leader>time :Calendar -view=clock<cr>
 
 
 " VimWiki, some kinds of personal diary
