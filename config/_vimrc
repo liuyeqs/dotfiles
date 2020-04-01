@@ -275,8 +275,10 @@ let g:syntastic_check_on_wq=0
 autocmd vimenter * NERDTree    " Load NERDTree automatically when vim starts up
 autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " let g:NERDTreeShowHidden=1
+let g:NERDTreeShowBookmarks = 1
 " Open NERDTRee
 noremap <Leader>tree :NERDTree<cr>
+
 
 
 " YCM
