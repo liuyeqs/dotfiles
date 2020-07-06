@@ -177,6 +177,7 @@ set splitbelow
 set splitright
 set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
 set noundofile  " Stop creating the undofile-backup files
+set backupdir=~/.vim/backup//,.
 
 
 " Mapping
@@ -315,6 +316,7 @@ let g:airline_theme='fruit_punch'
 " View and edit calendar on Google Calendar, or task on Google Task
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
+so c:/Users/003585/.cache/calendar.vim/credentials.vim
 " Open calendar.vim clock
 noremap <Leader>time :Calendar -view=clock<cr>
 
