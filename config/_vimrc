@@ -224,12 +224,14 @@ au BufNewFile, BufRead *.js, *.html, *.css
 highlight Normal guibg=#343236
 highlight LineNr guifg=#aabfbd
 highlight Comment guifg=#519953
+
 " Special color for my own special comment
-au! BufEnter *.py syn match specialComment /# liu>>>.*/  " Python files (*.py)
-highlight specialComment guifg=#ffbf11
+au! BufEnter *.py syn match specialComment0 /# liu>>>.*/  " Python files (*.py)
+highlight specialComment0 guifg=#ffbf11
+
 " Special color for FAIL
-au! BufEnter *.* syn match specialComment /FAIL/  " Python files (*.py)
-highlight specialComment guifg=#ff0000 guibg=#ffff00
+au! BufEnter *.wiki syn match specialComment1 /FAIL/  "Vimwiki files (*.py)
+highlight specialComment1 guifg=#ff0000 guibg=#ffff00
 
 " syntax highlight for python self
 :syn keyword pythonBuiltin self
