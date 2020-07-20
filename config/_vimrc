@@ -230,8 +230,12 @@ au! BufEnter *.py syn match specialComment0 /# liu>>>.*/  " Python files (*.py)
 highlight specialComment0 guifg=#ffbf11
 
 " Special color for FAIL
-au! BufEnter *.wiki syn match specialComment1 /FAIL/  "Vimwiki files (*.py)
+au! BufEnter *.wiki syn match specialComment1 /FAIL/  "Vimwiki files (*.wiki)
 highlight specialComment1 guifg=#ff0000 guibg=#ffff00
+
+" Special color for PRIORITY
+au! BufEnter *.wiki syn match specialComment2 /PRIO/  "Vimwiki files (*.wiki)
+highlight specialComment2 guifg=#144ca6 guibg=#d786ee
 
 " syntax highlight for python self
 :syn keyword pythonBuiltin self
