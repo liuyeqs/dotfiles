@@ -3,7 +3,8 @@ filetype off                  " required
 
 "===============================================================================
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set shellslash
+set rtp+=c:/D/Vim/~/vimfiles/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
@@ -53,7 +54,7 @@ Plugin 'scrooloose/nerdtree'
 
 "-------------------------------------------------
 " YCM
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 "-------------------------------------------------
 " tagbar
@@ -177,7 +178,7 @@ set splitbelow
 set splitright
 set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
 set noundofile  " Stop creating the undofile-backup files
-set backupdir=~/.vim/backup//,.
+set backupdir=c:/D/Vim/~/backup//,.
 
 
 " Mapping
@@ -185,9 +186,9 @@ set backupdir=~/.vim/backup//,.
 :let mapleader= "\<Space>"
 
 "Fast reloading of the .vimrl
-map  <Leader>rl :source c:/003585/VIM/_vimrc<cr>
+map  <Leader>rl :source c:/D/Vim/_vimrc<cr>
 "Fast editing of .vimrc
-map  <Leader>ee :e c:/003585/toolbox/vim_toolbox/dotfiles/config/_vimrc<cr>
+map  <Leader>ee :e c:/D/Vim/vim_toolbox/dotfiles/config/_vimrc<cr>
 
 " remap for split shifting
 noremap <C-H> <C-W><C-H>
@@ -293,14 +294,14 @@ noremap <Leader>tree :NERDTree<cr>
 
 " YCM
 "-------------------------------------------------
-let g:ycm_keep_logfiles=1
-let g:ycm_log_level='debug'
+" let g:ycm_keep_logfiles=1
+" let g:ycm_log_level='debug'
 
 
 " tagbar
 "-------------------------------------------------
-let g:tagbar_ctags_bin = 'C:\Users\003585\vimfiles\ctags-2019-07-25_1a94658c-x64.debug\ctags.exe'
-noremap <F8> :TagbarToggle<CR>
+" let g:tagbar_ctags_bin = 'C:\Users\liuye\vimfiles\ctags-2019-07-25_1a94658c-x64.debug\ctags.exe'
+" noremap <F8> :TagbarToggle<CR>
 
 
 " Split window resize
@@ -325,7 +326,7 @@ let g:airline_theme='fruit_punch'
 " View and edit calendar on Google Calendar, or task on Google Task
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
-so c:/Users/003585/.cache/calendar.vim/credentials.vim
+so c:\Users\liuye\.cache\calendar.vim\credentials.vim
 " Open calendar.vim clock
 noremap <Leader>time :Calendar -view=clock<cr>
 
@@ -341,13 +342,16 @@ let g:vimwiki_folding = 'expr'
 
 " Define wiki options
 let wiki_1 = {}
-let wiki_1.path = 'c:/003585/toolbox/vim_toolbox/My_vimwiki/vimwiki'
+let wiki_1.path = 'C:/D/Vim/vim_toolbox/My_vimwiki/vimwiki'
 " let wiki_1.html_template = '~/public_html/template.tpl'
 let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R'}
 
 let g:vimwiki_list = [wiki_1]
 let automatic_nested_syntaxes = 1
 
+" restrict Vimwiki's operation to only those paths listed in g:vimwiki_list.
+" other text files wouldn't be treated as wiki pages.
+let g:vimwiki_global_ext = 0
 
 " vim-rainbow
 "-------------------------------------------------
