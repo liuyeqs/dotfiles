@@ -4,7 +4,7 @@ filetype off                  " required
 "===============================================================================
 " set the runtime path to include Vundle and initialize
 set shellslash
-set rtp+=c:/D/Vim/~/vimfiles/bundle/Vundle.vim
+set rtp+=c:/Basics/Vim/Vundle/bundle\Vundle.vim"
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
@@ -32,7 +32,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'ascenator/L9', {'name': 'newL9'}
 
 "-------------------------------------------------
 " plugin SimpylFold
@@ -57,11 +57,18 @@ Plugin 'scrooloose/nerdtree'
 " Plugin 'Valloric/YouCompleteMe'
 
 "-------------------------------------------------
-" LSP
+" vim-LSP(Language Server Protocao)
 Plugin 'prabirshrestha/vim-lsp'
+" aoto configuration for Language Servers for vim-lsp
 Plugin 'mattn/vim-lsp-settings'
-" Auto-complete"
+
+" auto-completion"
 Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'keremc/asyncomplete-racer.vim'
+
+" rust.vim
+Plugin 'rust-lang/rust.vim'
 
 "-------------------------------------------------
 " vim-auto-popmenu
@@ -197,22 +204,30 @@ set guioptions-=m  "hide menu bar
 set guioptions-=T  "toolbar
 set guioptions-=r  "scrollbar
 set guioptions-=L  "leftside scrollbar
-set guifont=Cascadia_Code_SemiLight:h11,Cascadia_Mono_SemiLight:h11,Consolas:h11
+" set guifont=Cascadia_Code_SemiLight:h11,Cascadia_Mono_SemiLight:h11,Consolas:h11
+set guifont=Cascadia_Code_PL:h11
 set splitbelow
 set splitright
 set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
 set noundofile  " Stop creating the undofile-backup files
-set backupdir=c:/D/Vim/~/backup//,.
+set backupdir=d:/WLB/Vim/~/backup//,.
+
+" run shell command on PowerShell
+" set shell=powershell
+" set shellcmdflag=-commanl
 
 
 " Mapping
 "-------------------------------------------------
 :let mapleader= "\<Space>"
 
-"Fast reloading of the .vimrl
-map  <Leader>rl :source c:/D/Vim/_vimrc<cr>
-"Fast editing of .vimrc
-map  <Leader>ee :e c:/D/Vim/vim_toolbox/dotfiles/config/_vimrc<cr>
+" Fast reloading of the .vimrl
+map  <Leader>rl :source c:/Basics/Vim/_vimrc<cr>
+" Fast editing of .vimrc
+map  <Leader>ee :e d:/WLB/Vim/vim_toolbox/dotfiles/config/_vimrc<cr>
+
+" New tab
+noremap <Leader>tn :tabnew<cr>
 
 " remap for split shifting
 noremap <C-H> <C-W><C-H>
@@ -231,19 +246,19 @@ noremap <Leader>cnt :%s/[\u4EOO-\u9FCC0-9]/&/g<cr>
 
 " Indententaion
 "-------------------------------------------------
-au BUfNewFile, BufRead *.py
-  \ set tabstop=4
-  \ set softtabstop=4
-  \ set shiftwidth=4
-  \ set textwidth=79
-  \ set expandtab
-  \ set autoindent
-  \ set fileformat=unix
+" au BUfNewFile,BufRead *.py
+"   \ set tabstop=4
+"   \ set softtabstop=4
+"   \ set shiftwidth=4
+"   \ set textwidth=79
+"   \ set expandtab
+"   \ set autoindent
+"   \ set fileformat=unix
 
-au BufNewFile, BufRead *.js, *.html, *.css
-  \ set tabstop=2
-  \ set softtabstop=2
-  \ set shiftwidth=2
+" au BufNewFile,BufRead *.js, *.html, *.css
+"   \ set tabstop=2
+"   \ set softtabstop=2
+"   \ set shiftwidth=2
 
 
 " Highlight/color theme
@@ -283,6 +298,7 @@ highlight Search term=bold,reverse ctermfg=0 ctermbg=14 gui=bold guifg=Black gui
 
 "-------------------------------------------------
 " Setting for auto-complete of trentheses
+inoremap ` ``<ESC>i
 inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 inoremap ( ()<ESC>i
@@ -290,7 +306,7 @@ inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 " inoremap { {<cr>}<ESC>ko<tab>
 inoremap {<cr> {<cr>}<ESC>ko
-inoremap /* /*<cr><ESC>xxi*/<ESC>
+inoremap <> <><ESC>i
 " Show matching sets of parentheses
 :set showmatch
 
@@ -299,6 +315,35 @@ set foldmethod=indent
 set foldlevel=99
 " Enable folding/unfolding with the spacebar instead of <za>
 nnoremap <Leader> za
+
+
+"-------------------------------------------------
+" Setting for Rust
+autocmd FileType rust inoremap /* /*<cr><ESC>xxi*/<ESC>
+
+
+"-------------------------------------------------
+" Setting for Python
+autocmd BufNewFile *.py exec ":call SetTitle()"
+func SetTitle()
+  if &filetype == "python"
+     call setline(1, "#!/usr/bin/env python")
+     call setline(2, "# -* - coding: UTF-8 -* -")
+     call setline(3, "#Filename:")
+  endif
+endfunc
+
+let g:python_highlight_all = 1
+
+" PEP 8 indentation
+" au BufNewFile,BufRead *.py
+"     \ set tabstop=4
+"     \ set softtabstop=4
+"     \ set shiftwidth=4
+"     \ set textwidth=79
+"     \ set expandtab
+"     \ set autoindent
+"     \ set fileformat=unix
 
 
 " Plugin
@@ -336,19 +381,48 @@ noremap <Leader>tree :NERDTree<cr>
 " let g:ycm_log_level='debug'
 
 
-" LSP
-"-------------------------------------------------
-" :LspInstallServer
-" LSP server download directory [%LOCALAPPDATA%\vim-lsp-settings\servers]
-" Auto-complete
-" Tab completion
-let g:asyncomplete_auto_popup = 0  " disable auto popup
-
-
 " tagbar
 "-------------------------------------------------
 " let g:tagbar_ctags_bin = 'C:\Users\liuye\vimfiles\ctags-2019-07-25_1a94658c-x64.debug\ctags.exe'
-" noremap <F8> :TagbarToggle<CR>
+" let g:tagbar_ctags_bin = 'C:\Basics\Vim\vimfiles\plugin\ctags58\ctags.exe'
+let g:tagbar_ctags_bin = 'C:\Basics\Vim\vimfiles\plugin\ctags-2022-07-25_p5_x64\ctags.exe'
+noremap <F8> :TagbarToggle<CR>
+
+" for RUST
+let g:rust_use_custom_ctags_defs = 1  " if using rust.vim
+let g:tagbar_type_rust = {
+  \ 'ctagsbin' : 'C:\Basics\Vim\vimfiles\plugin\ctags-2022-07-25_p5_x64\ctags.exe',
+  \ 'ctagstype' : 'rust',
+  \ 'kinds' : [
+      \ 'n:modules',
+      \ 's:structures:1',
+      \ 'i:interfaces',
+      \ 'c:implementations',
+      \ 'f:functions:1',
+      \ 'g:enumerations:1',
+      \ 't:type aliases:1:0',
+      \ 'v:constants:1:0',
+      \ 'M:macros:1',
+      \ 'm:fields:1:0',
+      \ 'e:enum variants:1:0',
+      \ 'P:methods:1',
+  \ ],
+  \ 'sro': '::',
+  \ 'kind2scope' : {
+      \ 'n': 'module',
+      \ 's': 'struct',
+      \ 'i': 'interface',
+      \ 'c': 'implementation',
+      \ 'f': 'function',
+      \ 'g': 'enum',
+      \ 't': 'typedef',
+      \ 'v': 'variable',
+      \ 'M': 'macro',
+      \ 'm': 'field',
+      \ 'e': 'enumerator',
+      \ 'P': 'method',
+  \ },
+\ }
 
 
 " Split window resize
@@ -379,7 +453,7 @@ let g:winresizer_horiz_resize=1
 " View and edit calendar on Google Calendar, or task on Google Task
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
-so c:\Users\liuye\.cache\calendar.vim\credentials.vim
+" so c:\Users\liuye\.cache\calendar.vim\credentials.vim
 " Open calendar.vim clock
 noremap <Leader>time :Calendar -view=clock<cr>
 
@@ -395,7 +469,7 @@ let g:vimwiki_folding = 'expr'
 " Define wiki options
 let wiki_1 = {}
 let wiki_1.name = 'My_Wiki'
-let wiki_1.path = 'C:/D/Vim/vim_toolbox/My_vimwiki/vimwiki'
+let wiki_1.path = 'D:/WLB/Vim/vim_toolbox/My_vimwiki/vimwiki'
 " let wiki_1.html_template = '~/public_html/template.tpl'
 let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R', 'rust': 'rs'}
 let wiki_1.auto_toc = 1
@@ -403,7 +477,7 @@ let wiki_1.auto_diary_index = 1
 
 let wiki_2 = {}
 let wiki_2.name = 'My_PD'
-let wiki_2.path = 'C:/D/Vim/vim_toolbox/My_vimwiki/PersonalDev'
+let wiki_2.path = 'D:/WLB/Vim/vim_toolbox/My_vimwiki/PersonalDev'
 let wiki_2.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'r': 'R', 'rust': 'rs'}
 let wiki_2.auto_toc = 1
 
@@ -437,3 +511,48 @@ let g:rainbow_active = 1
   let g:vim_markdown_folding_disable=1
   let g:previm_enable_realtime=1
 " }}}
+
+
+" LSP
+"-------------------------------------------------
+" :LspInstallServer
+" LSP server download directory [%LOCALAPPDATA%\vim-lsp-settings\servers]
+" Auto-complete
+" Automatically show the autocomplete popup menu
+let g:asyncomplete_auto_popup = 1  " disable auto popup: 0
+" Minimum consecutive chars to trigger auto-popup.
+let g:asyncomplete_min_chars = 2
+
+" Tab completion(firstly, make auto popup disable)
+" function! s:check_back_space() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+"
+" inoremap <silent><expr> <TAB>
+"   \ pumvisible() ? '\<C-n>' :
+"   \ <SID>check_back_space() ? '\<TAB>' :
+"   \ asyncomplete#force_refresh()
+" inoremap <expr><S-TAB> pumvisible() ? '\<C-p>' : '\<C-h>'
+
+" Preview Window
+" allow modifying the completeopt variable, or it will
+" be overridden all the time
+let g:asyncomplete_auto_completeopt = 1
+set completeopt=menuone,noinsert,noselect,preview
+" auto close preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" show diagnostics message within status line
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_diagnostics_echo_cursor = 0
+
+" Python language server
+if executable('pyls')
+    "pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
