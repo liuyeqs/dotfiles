@@ -37,7 +37,6 @@ Plugin 'ascenator/L9', {'name': 'newL9'}
 "-------------------------------------------------
 " plugin SimpylFold
 Plugin 'tmhedberg/SimpylFold'
-let g:SimpylFold_docstring_preview=1
 
 "-------------------------------------------------
 " Syntax checking
@@ -205,7 +204,7 @@ set guioptions-=T  "toolbar
 set guioptions-=r  "scrollbar
 set guioptions-=L  "leftside scrollbar
 " set guifont=Cascadia_Code_SemiLight:h11,Cascadia_Mono_SemiLight:h11,Consolas:h11
-set guifont=Cascadia_Code_PL:h11
+set guifont=CodeNewRoman_Nerd_Font:h12,Cascadia_Code_PL:h11
 set splitbelow
 set splitright
 set list listchars=tab:»·,trail:·,nbsp:·  " Display extra whitespace
@@ -319,6 +318,8 @@ nnoremap <Leader> za
 
 "-------------------------------------------------
 " Setting for Rust
+" autocmd FileType rust inoremap /* /*<cr><ESC>i*/<ESC>
+" autocmd FileType rust inoremap /* /**/<ESC>hi<cr>
 autocmd FileType rust inoremap /* /*<cr><ESC>xxi*/<ESC>
 
 
@@ -334,16 +335,6 @@ func SetTitle()
 endfunc
 
 let g:python_highlight_all = 1
-
-" PEP 8 indentation
-" au BufNewFile,BufRead *.py
-"     \ set tabstop=4
-"     \ set softtabstop=4
-"     \ set shiftwidth=4
-"     \ set textwidth=79
-"     \ set expandtab
-"     \ set autoindent
-"     \ set fileformat=unix
 
 
 " Plugin
@@ -466,6 +457,8 @@ noremap <Leader>time :Calendar -view=clock<cr>
 " <Leader>w<Leader>i
 let g:vimwiki_folding = 'expr'
 
+" List and select available wikis.
+" <Leader>ws
 " Define wiki options
 let wiki_1 = {}
 let wiki_1.name = 'My_Wiki'
@@ -489,6 +482,24 @@ let g:vimwiki_list_ignore_newline = 0
 " restrict Vimwiki's operation to only those paths listed in g:vimwiki_list.
 " other text files wouldn't be treated as wiki pages.
 let g:vimwiki_global_ext = 0
+
+" Tips key mapping
+" <Leader>wt
+"   Open index file of the [count]'s wiki in a new tab.
+" <Leader>ws
+"   List and select available wikis.
+" [count]<Leader>wi
+"   Open diary index file of the [count]'s wiki.
+" [count]<Leader>w<Leader>w
+"   Open diary wiki-file for today of the [count]'s wiki.
+" <Leader>wh         n    Convert current wiki page to HTML.
+" <Leader>wh         n    Convert current wiki page to HTML.
+" <Leader>wh         n    Convert current wiki page to HTML.
+" <C-Space>         n     Toggle checkbox of a list item on/off.
+" :VimwikiTable*
+"   Create a table with 5 cols and 2 rows.
+" :VimwikiTOC*
+"   Create or update the Table of Contents for the current wiki file.
 
 
 " vim-rainbow
